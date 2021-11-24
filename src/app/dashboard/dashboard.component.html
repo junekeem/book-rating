@@ -1,2 +1,13 @@
-<p>dashboard works!</p>
-<br-book [book]="books[0]"></br-book>
+<!--
+  Variant 1:
+<div *ngFor="let b of books">
+  <br-book [book]="b"></br-book>
+</div>
+
+Variant 2:
+<ng-container *ngFor="let b of books"> :Render only its container, so better in performance than div
+  <br-book [book]="b"></br-book>
+</ng-container>
+-->
+
+<br-book *ngFor="let b of books; index as i; last as l" [book]="b"></br-book>

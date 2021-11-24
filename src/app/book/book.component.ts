@@ -15,4 +15,8 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  trackBook(index: number, item: Book) {
+    return index;
+  }
+
 }
