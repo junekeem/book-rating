@@ -15,6 +15,11 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  printStars(num: number): string{
+    const star = '⭐️';
+    return num > 0 ? star.repeat(num): "No rating exists!"
+  }
+
   trackBook(index: number, item: Book) {
     return index;
   }

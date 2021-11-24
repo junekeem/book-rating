@@ -9,5 +9,5 @@ Variant 2:
   <br-book [book]="b"></br-book>
 </ng-container>
 -->
-
+<p>Total: {{ books.length }}</p>
 <br-book *ngFor="let b of books; index as i; last as l" [book]="b"></br-book>

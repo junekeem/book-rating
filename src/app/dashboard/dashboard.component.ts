@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
         price: 25.90
       }
     ];
-   }
+  }
 
   ngOnInit(): void { // LifeCycle Hook; Handle when the component starts
   }
