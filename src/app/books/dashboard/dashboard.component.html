@@ -10,4 +10,8 @@ Variant 2:
 </ng-container>
 -->
 <p>Total: {{ books.length }}</p>
-<br-book *ngFor="let b of books; index as i; last as l" [book]="b"></br-book>
+<br-book
+  *ngFor="let b of books"
+  [book]="b"
+  (rateUp)="onRateUp($event)"
+  (rateDown)="onRateDown($event)"></br-book>

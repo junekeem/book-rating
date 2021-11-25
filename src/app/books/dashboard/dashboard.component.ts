@@ -34,4 +34,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void { // LifeCycle Hook; Handle when the component starts
   }
 
+  onRateUp(book: Book) {
+    book.rating++;
+    console.log('UP', book);
+  }
+
+  onRateDown(book: Book) {
+    book.rating--;
+    console.log('Down', book);
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Book } from '../shared/book';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'br-book',
@@ -7,6 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
+
+  @Output() rateUp = new EventEmitter<Book>();
+  @Output() rateDown = new EventEmitter<Book>();
 
   @Input() book?: Book
 
@@ -18,6 +21,14 @@ export class BookComponent implements OnInit {
   printStars(num: number): string{
     const star = '⭐️';
     return num > 0 ? star.repeat(num): "No rating exists!"
+  }
+
+  onRateUp() {
+    this.rateUp.emit(this.book);
+  }
+
+  onRateDown() {
+    this.rateDown.emit(this.book);
   }
 
   trackBook(index: number, item: Book) {
