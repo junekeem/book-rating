@@ -1,20 +1,18 @@
+import { BooksModule } from './books/books.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DashboardComponent,
-    BookComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BooksModule
   ],
   providers: [],
   bootstrap: [AppComponent]
