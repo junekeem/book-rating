@@ -1,10 +1,11 @@
 import { Book } from '../shared/book';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'br-book',
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss']
+  styleUrls: ['./book.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent implements OnInit {
 
