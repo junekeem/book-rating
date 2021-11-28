@@ -9,7 +9,10 @@ Variant 2:
   <br-book [book]="b"></br-book>
 </ng-container>
 -->
-<p>Total: {{ books.length }}</p>
+<p>
+  Total: {{ books.length }}
+  <button class="btn btn-info float-right" (click)="reset()">Reset</button>
+</p>
 <br-book
   *ngFor="let b of books; trackBy: trackBook"
   [book]="b"

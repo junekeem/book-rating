@@ -51,6 +51,12 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  reset() {
+    this.bookStoreService.reset().subscribe(response => {
+      if(response) this.getList();
+    })
+  }
+
   private delete(isbn: string) {
     this.bookStoreService.delete(isbn).subscribe((response) => {
       if(response) this.getList();
