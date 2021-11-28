@@ -1,3 +1,4 @@
+import { DialogService } from './../shared/dialog.service';
 import { BookStoreService } from './../shared/book-store.service';
 import { BookRatingService } from './../shared/book-rating.service';
 import { Book } from '../shared/book';
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private rs: BookRatingService, // by writing access modifier, no need to define property again (Day 1),
-    private bookStoreService: BookStoreService
+    private bookStoreService: BookStoreService,
+    private dialogService: DialogService
   ) {
     // From Angular 12, not in ngOnInit, but in constructor; Strict blah..
     this.bookStoreService.getAll().subscribe((books) => {
@@ -43,9 +45,17 @@ export class DashboardComponent implements OnInit {
     this.updateList(ratedBook);
   }
 
-  onDelete(book: Book) {
-    console.log(book.isbn);
-    this.bookStoreService.delete(book.isbn).subscribe((response) => {
+  onDeleteConfirmDialog(book: Book) {
+    this.dialogService.confirm("Do you really want to delete?").subscribe(
+      result => {
+        if(result) this.delete(book.isbn);
+      }
+    )
+  }
+
+  private delete(isbn: string) {
+    console.log(isbn);
+    this.bookStoreService.delete(isbn).subscribe((response) => {
       console.log(response);
     });
   }
