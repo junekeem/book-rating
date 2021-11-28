@@ -1,3 +1,4 @@
+import { Rating } from './../shared/rating';
 import { DialogService } from './../shared/dialog.service';
 import { BookStoreService } from './../shared/book-store.service';
 import { BookRatingService } from './../shared/book-rating.service';
@@ -34,12 +35,12 @@ export class DashboardComponent implements OnInit {
 
   onRateUp(book: Book) {
     const ratedBook = this.rs.rateUp(book);
-    this.updateList(ratedBook);
+    this.updateRating(ratedBook);
   }
 
   onRateDown(book: Book) {
     const ratedBook = this.rs.rateDown(book);
-    this.updateList(ratedBook);
+    this.updateRating(ratedBook);
   }
 
   onDeleteConfirmDialog(book: Book) {
@@ -63,10 +64,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private updateList(ratedBook: Book) {
-    this.books = this.books.map((book) =>
-      book.isbn === ratedBook.isbn ? ratedBook : book
-    );
+  private updateRating(book: Book) {
+    const { isbn, rating } = book
+    const newRating: Rating = { rating: rating };
+    this.bookStoreService.updateRating(isbn, newRating).subscribe(
+      response => {
+        if(response) this.getList();
+    })
   }
 
   private getList() {

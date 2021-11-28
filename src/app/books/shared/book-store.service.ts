@@ -1,3 +1,4 @@
+import { Rating } from './rating';
 import { Book } from './book';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -33,5 +34,9 @@ export class BookStoreService {
 
   delete(isbn: string): Observable<unknown> {
     return this.http.delete(this.apiUrl + `/books/${isbn}`);
+  }
+
+  updateRating(isbn: string, rate: Rating): Observable<any> {
+    return this.http.post<Rating>(this.apiUrl + `/books/${isbn}/rate`, rate);
   }
 }
