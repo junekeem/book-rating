@@ -21,10 +21,7 @@ export class DashboardComponent implements OnInit {
     private bookStoreService: BookStoreService,
     private dialogService: DialogService
   ) {
-    // From Angular 12, not in ngOnInit, but in constructor; Strict blah..
-    this.bookStoreService.getAll().subscribe((books) => {
-      this.books = books;
-    });
+    this.getList();
   }
 
   ngOnInit(): void {
@@ -48,15 +45,15 @@ export class DashboardComponent implements OnInit {
   onDeleteConfirmDialog(book: Book) {
     this.dialogService.confirm("Do you really want to delete?").subscribe(
       result => {
-        if(result) this.delete(book.isbn);
+        if(result) {
+          this.delete(book.isbn);        }
       }
     )
   }
 
   private delete(isbn: string) {
-    console.log(isbn);
     this.bookStoreService.delete(isbn).subscribe((response) => {
-      console.log(response);
+      if(response) this.getList();
     });
   }
 
@@ -64,5 +61,11 @@ export class DashboardComponent implements OnInit {
     this.books = this.books.map((book) =>
       book.isbn === ratedBook.isbn ? ratedBook : book
     );
+  }
+
+  private getList() {
+    this.bookStoreService.getAll().subscribe((books) => {
+      this.books = books;
+    });
   }
 }
