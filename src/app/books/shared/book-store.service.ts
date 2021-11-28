@@ -4,20 +4,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookStoreService {
-
   private apiUrl = 'https://api.angular.schule';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<Book[]> {
     return this.http.get<Book[]>(this.apiUrl + '/books');
   }
 
-  getSingle(isbn: number): Observable<Book> {
-    return this.http.get<Book>(this.apiUrl + `/books/${isbn}`)
+  getSingle(isbn: string): Observable<Book> {
+    return this.http.get<Book>(this.apiUrl + `/books/${isbn}`);
   }
 
   create(book: Book): Observable<Book> {
@@ -28,4 +27,11 @@ export class BookStoreService {
     return this.http.get<Book[]>(this.apiUrl + `/search/${term}`);
   }
 
+  reset() {
+    return this.http.delete(this.apiUrl + '/books');
+  }
+
+  delete(isbn: string): Observable<unknown> {
+    return this.http.delete(this.apiUrl + `/books/${isbn}`);
+  }
 }

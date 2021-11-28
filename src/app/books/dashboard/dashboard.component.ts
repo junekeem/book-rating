@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'br-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   // books?: Book[];
   // books : Book[] | undefined;
   books: Book[] = [];
@@ -19,15 +18,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private rs: BookRatingService, // by writing access modifier, no need to define property again (Day 1),
     private bookStoreService: BookStoreService
-  ) { // From Angular 12, not in ngOnInit, but in constructor; Strict blah..
-    this.bookStoreService.getAll().subscribe(
-      books => {
-        this.books = books;
-      }
-    )
+  ) {
+    // From Angular 12, not in ngOnInit, but in constructor; Strict blah..
+    this.bookStoreService.getAll().subscribe((books) => {
+      this.books = books;
+    });
   }
 
-  ngOnInit(): void { // LifeCycle Hook; Handle when the component starts
+  ngOnInit(): void {
+    // LifeCycle Hook; Handle when the component starts
   }
 
   trackBook(index: number, item: Book) {
@@ -44,8 +43,16 @@ export class DashboardComponent implements OnInit {
     this.updateList(ratedBook);
   }
 
-  private updateList(ratedBook: Book) {
-    this.books = this.books.map(book => book.isbn === ratedBook.isbn ? ratedBook : book);
+  onDelete(book: Book) {
+    console.log(book.isbn);
+    this.bookStoreService.delete(book.isbn).subscribe((response) => {
+      console.log(response);
+    });
   }
 
+  private updateList(ratedBook: Book) {
+    this.books = this.books.map((book) =>
+      book.isbn === ratedBook.isbn ? ratedBook : book
+    );
+  }
 }

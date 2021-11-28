@@ -1,29 +1,35 @@
 import { Book } from '../shared/book';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'br-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent implements OnInit {
-
   @Output() rateUp = new EventEmitter<Book>();
   @Output() rateDown = new EventEmitter<Book>();
+  @Output() delete = new EventEmitter<Book>();
 
-  @Input() book?: Book
+  @Input() book?: Book;
 
   constructor() {
-    console.log("BookComponent");
+    console.log('BookComponent');
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  printStars(num: number): string{
+  printStars(num: number): string {
     const star = '⭐️';
-    return num > 0 ? star.repeat(num): "No rating exists!"
+    return num > 0 ? star.repeat(num) : 'No rating exists!';
   }
 
   onRateUp() {
@@ -34,8 +40,11 @@ export class BookComponent implements OnInit {
     this.rateDown.emit(this.book);
   }
 
+  onDelete() {
+    this.delete.emit(this.book);
+  }
+
   trackBook(index: number, item: Book) {
     return index;
   }
-
 }
