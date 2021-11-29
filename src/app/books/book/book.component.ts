@@ -20,10 +20,10 @@ export class BookComponent implements OnInit {
   @Output() delete = new EventEmitter<Book>();
 
   @Input() book?: Book;
+  @Input() maxRating = 5;
+  @Input() minRating = 1;
 
-  constructor() {
-    console.log('BookComponent');
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 

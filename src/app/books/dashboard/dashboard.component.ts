@@ -1,4 +1,3 @@
-import { Rating } from './../shared/rating';
 import { DialogService } from './../shared/dialog.service';
 import { BookStoreService } from './../shared/book-store.service';
 import { BookRatingService } from './../shared/book-rating.service';
@@ -44,33 +43,46 @@ export class DashboardComponent implements OnInit {
   }
 
   onDeleteConfirmDialog(book: Book) {
-    this.dialogService.confirm("Do you really want to delete?").subscribe(
-      result => {
-        if(result) {
-          this.delete(book.isbn);        }
-      }
-    )
+    this.dialogService
+      .confirm('Do you really want to delete?')
+      .subscribe((result) => {
+        result ? this.delete(book.isbn) : null;
+      });
   }
 
   reset() {
-    this.bookStoreService.reset().subscribe(response => {
-      if(response) this.getList();
-    })
+    this.bookStoreService.reset().subscribe({
+      complete: () => {
+        this.getList();
+      },
+    });
   }
 
   private delete(isbn: string) {
-    this.bookStoreService.delete(isbn).subscribe((response) => {
-      if(response) this.getList();
+    this.bookStoreService.delete(isbn).subscribe({
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.getList();
+      },
     });
   }
 
   private updateRating(book: Book) {
-    const { isbn, rating } = book
-    const newRating: Rating = { rating: rating };
-    this.bookStoreService.updateRating(isbn, newRating).subscribe(
-      response => {
-        if(response) this.getList();
-    })
+    const { isbn, rating } = book;
+    this.bookStoreService.updateRating(isbn, rating).subscribe({
+      next: (response) => {
+        const { rate } = response;
+        rate ? this.getList() : null;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Update Rating!');
+      },
+    });
   }
 
   private getList() {
