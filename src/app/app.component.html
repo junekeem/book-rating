@@ -1,5 +1,10 @@
 <div class="container">
-  <h1>{{ title }}</h1>
+  <div>
+    <h1>
+      {{ title }}
+      <div class="h6 mt-3 float-right">{{time | async | date: 'medium'}}</div>
+    </h1>
+  </div>
   <hr>
   <nav class="mb-3">
     <button class="btn mr-1" routerLink="/books" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</button>
