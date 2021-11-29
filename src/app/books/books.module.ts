@@ -5,13 +5,17 @@ import { CommonModule } from '@angular/common';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { SearchComponent } from './search/search.component';
+import { CreateComponent } from './create/create.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     BookComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    SearchComponent,
+    CreateComponent
   ],
   imports: [
     CommonModule,

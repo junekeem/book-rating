@@ -1,5 +1,12 @@
 <div class="container">
   <h1>{{ title }}</h1>
+  <hr>
+  <nav class="mb-3">
+    <button class="btn mr-1" routerLink="/books" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</button>
+    <button class="btn mr-1" routerLink="/books/search" routerLinkActive="active">Search</button>
+    <button class="btn mr-1" routerLink="/books/create" routerLinkActive="active">Create</button>
+  </nav>
+  <hr>
   <router-outlet></router-outlet>
 </div>
 
