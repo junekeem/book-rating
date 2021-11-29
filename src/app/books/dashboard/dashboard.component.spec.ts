@@ -51,7 +51,7 @@ describe('DashboardComponent', () => {
 
     // Act
     // spyOn(rs, 'rateUp'); // spy covers 'rateUp' and  deals all requests/responses
-    spyOn(rs, 'rateUp').and.callThrough();
+    spyOn(rs, 'rateUp').and.callThrough(); // Alternative without rateUp mock: spyOn(rs. 'rateUp').and.callFake(book => book);
     component.onRateUp(book);
 
     // Assert: use just one of them
