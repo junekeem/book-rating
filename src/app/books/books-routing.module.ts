@@ -1,5 +1,5 @@
-import { CreateComponent } from './create/create.component';
-import { SearchComponent } from './search/search.component';
+import { BookCreateComponent } from './book-create/book-create.component';
+import { BookSearchComponent } from './book-search/book-search.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { NgModule } from '@angular/core';
@@ -9,11 +9,11 @@ const routes: Routes = [
   { path: '', component: DashboardComponent }, // path is always relative, so don't write '/' in path like this: { path: '/books'... }
   {
     path: 'search',
-    component: SearchComponent
+    component: BookSearchComponent
   },
   {
     path: 'create',
-    component: CreateComponent
+    component: BookCreateComponent
   },
   {
     path: ':isbn', // Better solution => path: 'details/:isbn';

@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { BookDetailsComponent } from './book-details/book-details.component';
-import { SearchComponent } from './search/search.component';
-import { CreateComponent } from './create/create.component';
+import { BookCreateComponent } from './book-create/book-create.component';
+import { BookSearchComponent } from './book-search/book-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import { CreateComponent } from './create/create.component';
     DashboardComponent,
     BookComponent,
     BookDetailsComponent,
-    SearchComponent,
-    CreateComponent
+    BookCreateComponent,
+    BookSearchComponent
   ],
   imports: [
     CommonModule,
-    BooksRoutingModule
+    BooksRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     DashboardComponent
