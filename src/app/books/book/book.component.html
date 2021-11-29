@@ -13,6 +13,8 @@
     <p>Preis: {{ book.price | currency: 'EUR' }}</p>
     <button class="btn btn-success mr-2" (click)="onRateUp()" [disabled]="book.rating === 5"> + </button> <!-- TODO -->
     <button class="btn btn-danger mr-2" (click)="onRateDown()" [disabled]="book.rating === 1"> - </button> <!-- TODO -->
+    <a [routerLink]="['/books', book.isbn]">Details</a><!--absolute path: /books => /books/123456-->
+    <!-- <a [routerLink]="book.isbn">Details</a> // relative path: /books => ./123456 -->
     <button class="btn btn-info float-right" (click)="onDelete()"> X </button>
   </div>
 </div>

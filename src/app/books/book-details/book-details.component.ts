@@ -1,15 +1,40 @@
+import { BookStoreService } from './../shared/book-store.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'br-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.scss']
+  styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent implements OnInit {
 
-  constructor() { }
+  book?: Book;
+  isbn?: string;
 
-  ngOnInit(): void {
+  constructor(
+    private route: ActivatedRoute,
+    private bookStoreService: BookStoreService
+  ) {
+    // Synchroner Weg (PULL)
+    // const isbn = this.route.snapshot.paramMap.get('isbn');
+    // console.log(isbn);
+
+    //Asynchroner Weg (PUSH)
+    this.route.paramMap.subscribe((params) => {
+      this.isbn = params.get('isbn')!; // Non-null assertion operator: !
+      console.log(this.isbn);
+
+      this.getSingleBook(this.isbn);
+    });
   }
 
+  getSingleBook(isbn: string){
+    this.bookStoreService.getSingle(isbn).subscribe(
+      book => this.book = book
+    )
+  }
+
+  ngOnInit(): void {}
 }
