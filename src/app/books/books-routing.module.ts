@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'books', component: DashboardComponent }, // path is always relative, so don't write '/' in path like this: { path: '/books'... }
+  { path: '', component: DashboardComponent }, // path is always relative, so don't write '/' in path like this: { path: '/books'... }
   {
-    path: 'books/:isbn',
+    path: ':isbn',
     component: BookDetailsComponent,
   },
 ];
