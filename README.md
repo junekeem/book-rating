@@ -27,6 +27,8 @@ Interface has advantages in processing data from a remote server:
 * Unlike class, no need of re-instantiating multiple times
 * Easy to turn into full class
 
+<hr>
+
 ## Day 2
 
 ### Template Syntax
@@ -73,3 +75,60 @@ Parameter Properties: TypeScript provides a shortcut to create properties/fields
 |----|----------|-----------|
 |Pipe|expression \| myPipe \| anotherPipe|Transform the data|
 
+<hr>
+
+## Day 3
+
+### Tree Shakable Providers
+
+By registering services to module in two-way, unused services can be detected and this can improve performance of an Angular application.
+
+* Service <--- Module ( Recommended)
+```typescript
+  @Injectable({providedIn:'root'})
+  export class TestService { }
+```
+
+* Service ---> Module
+```typescript
+  @NgModule({
+    providers:[TestService],
+    // ...
+  })
+  export class AppModule { }
+```
+
+### Shallow Component Test
+
+* **schemas: [NO_ERRORS_SCHEMA]:** All child components are ignored
+
+```typescript
+await TestBed.configureTestingModule({
+      declarations: [ DashboardComponent ],
+      schemas: [NO_ERRORS_SCHEMA], // Shallow Component Test
+      providers: [
+        { provide: BookRatingService, useValue: ratingMock }
+      ]
+```
+
+### Change Detection Optimization
+
+**Change Detection**: If any changes happen, Angular calculate all the bindings again, but only the changed element is newly rendered: For the safety, to check immutibility
+
+* **ChangeDetectionStrategy.OnPush:** Execute change detection only if:
+  * Event Binding ──────────┐
+  * HTTP / WebSocket ──── Zone.js:
+  * Timeout / Interval ───── library from Angular, it triggers change detection
+  * Promise ─────────────┘
+  * Manual changes / `@Input()` changes / `async`-Pipe...
+
+```typescript
+  @Component({
+    selector: 'br-book',
+    templateUrl: './book.component.html',
+    styleUrls: ['./book.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush //
+  })
+  export class BookComponent implements OnInit {
+```
+<hr>
