@@ -132,3 +132,29 @@ await TestBed.configureTestingModule({
   export class BookComponent implements OnInit {
 ```
 <hr>
+
+## Day 4
+
+### Eager Loading / Lazy Loading
+
+|Eager Loading|Lazy Loading|
+|-------------|------------|
+|By default, NgModules are eagerly loaded, which means that as soon as the application loads, so do all the NgModules, whether or not they are immediately necessary. |Lazy loading is a design pattern that loads NgModules as needed. Lazy loading helps keep initial bundle sizes smaller, which in turn helps decrease load times.|
+
+app-routing.module.ts
+```typescript
+{
+  path: 'books',
+  loadChildren: () => import('./books/books.module') //dynamic import
+                      .then(m => m.BooksModule)
+}
+```
+
+### Reactive Forms: `ReactiveFormsModule`
+* Form model in the component
+* FormGroup, FormControl, FormArray
+* One-Way and setValue() / patchValue()
+* Binding inputs to form model
+* Validators as part of the form model
+
+<hr>
