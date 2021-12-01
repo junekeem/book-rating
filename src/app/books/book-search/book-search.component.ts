@@ -16,6 +16,15 @@ export class BookSearchComponent implements OnInit {
     })
   }
 
+  /**
+   * Typeahead-Search
+   * - Search term min 3 characters (with RxJS)
+   * - Do not search after every typing
+   * - Search books from the Server (HTTP)
+   * - Display the results
+   * - AsyncPipe
+   */
+
   ngOnInit(): void {
   }
 
