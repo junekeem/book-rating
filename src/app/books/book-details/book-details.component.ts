@@ -22,11 +22,20 @@ export class BookDetailsComponent implements OnInit {
     // console.log(isbn);
 
     //Asynchroner Weg (PUSH)
-    this.route.paramMap.subscribe((params) => { // TODO: Callback hell
-      this.isbn = params.get('isbn')!; // Non-null assertion operator: !
-      console.log(this.isbn);
+    // this.route.paramMap.subscribe((params) => { // TODO: Callback hell ✔
+    //   this.isbn = params.get('isbn')!; // Non-null assertion operator: !
+    //   console.log(this.isbn);
 
-      this.getSingleBook(this.isbn);
+    //   this.getSingleBook(this.isbn);
+    // });
+
+    this.route.paramMap
+
+    params.get('isbn')!
+    this.bs.getSingle(isbn)
+
+    .subscribe(book => {
+      this.book = book;
     });
   }
 
