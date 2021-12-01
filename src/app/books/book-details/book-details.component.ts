@@ -2,7 +2,7 @@ import { BookStoreService } from './../shared/book-store.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from '../shared/book';
-import { map, mergeMap, switchMap } from 'rxjs';
+import { map, mergeMap, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'br-book-details',
@@ -11,8 +11,7 @@ import { map, mergeMap, switchMap } from 'rxjs';
 })
 export class BookDetailsComponent implements OnInit {
 
-  book?: Book;
-  isbn?: string;
+  book$: Observable<Book>;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,18 +30,15 @@ export class BookDetailsComponent implements OnInit {
     //   this.getSingleBook(this.isbn);
     // });
 
-    this.route.paramMap.pipe(
+    this.book$ = this.route.paramMap.pipe(
       map(params => params.get('isbn')!),
       switchMap(isbn => this.bookStoreService.getSingle(isbn))
-    ).subscribe(book => {
-      this.book = book;
-    });
+    );
+
   }
 
   getSingleBook(isbn: string){
-    this.bookStoreService.getSingle(isbn).subscribe(
-      book => this.book = book
-    )
+    this.bookStoreService.getSingle(isbn).subscribe()
   }
 
   ngOnInit(): void {}
