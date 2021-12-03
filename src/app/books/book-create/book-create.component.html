@@ -1,7 +1,4 @@
-<br-book-form></br-book-form>
-
-<!-- <button class="btn btn-success" type="submit" [disabled]="bookForm.invalid">Send</button> -->
-<!-- <button class="btn btn-success" type="submit">Send</button> -->
-<button class="btn btn-success" (click)="createBook()">Send</button>
-
-<hr />
+<br-book-form
+  (newBookForm)="getNewBookForm($event)"
+  [buttonText]="edit"
+></br-book-form>

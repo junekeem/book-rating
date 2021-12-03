@@ -1,5 +1,6 @@
+import { Book } from './../shared/book';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'br-book-form',
@@ -7,6 +8,10 @@ import { Component, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./book-form.component.scss'],
 })
 export class BookFormComponent implements OnInit {
+
+  @Output() newBookForm = new EventEmitter<FormGroup>();
+
+  @Input() buttonText= 'Button';
 
   bookForm!: FormGroup;
 
@@ -36,5 +41,13 @@ export class BookFormComponent implements OnInit {
   hasError(controlName: string, errorCode: string) {
     const control = this.bookForm.get(controlName);
     return !!control && control.touched && control?.hasError(errorCode);
+  }
+
+  onSubmit() {
+    if (this.bookForm.invalid) {
+      this.bookForm.markAllAsTouched();
+      return;
+    }
+    this.newBookForm.emit(this.bookForm);
   }
 }

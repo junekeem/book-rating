@@ -3,6 +3,7 @@ import { BookStoreService } from './../shared/book-store.service';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'br-book-create',
@@ -11,10 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BookCreateComponent implements OnInit {
 
-  @ViewChild(BookFormComponent)
-  private bookFormComponent!: BookFormComponent;
-
-  bookForm!: FormGroup;
+  edit: string = 'Edit';
 
   constructor(
     private bookStoreService: BookStoreService,
@@ -23,15 +21,14 @@ export class BookCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  createBook() {
+  getNewBookForm(bookForm: FormGroup){
+    this.createBook(bookForm);
+  }
 
-    if (this.bookFormComponent.bookForm.invalid) {
-      this.bookFormComponent.bookForm.markAllAsTouched();
-      return;
-    }
+  private createBook(bookForm: FormGroup) {
 
-    // const book: Book = this.bookForm.value;
-    this.bookStoreService.create(this.bookFormComponent.bookForm.value).subscribe(book => {
+    const book: Book = bookForm.value;
+    this.bookStoreService.create(book).subscribe(book => {
       // Option 1
       this.router.navigate(['/books', book.isbn]); // [routerLink] = ['/books', book.isbn]
       // Option 2
