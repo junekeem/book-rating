@@ -1,9 +1,9 @@
-import { BookFormComponent } from './../book-form/book-form.component';
-import { BookStoreService } from './../shared/book-store.service';
+import { BookFormComponent } from '../shared/components/book-form/book-form.component';
+import { BookStoreService } from './../shared/services/book-store.service';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Book } from '../shared/book';
+import { Book } from '../shared/models/book';
 
 @Component({
   selector: 'br-book-create',

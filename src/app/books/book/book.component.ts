@@ -1,4 +1,4 @@
-import { Book } from '../shared/book';
+import { Book } from '../shared/models/book';
 import {
   ChangeDetectionStrategy,
   Component,

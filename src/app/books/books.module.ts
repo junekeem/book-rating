@@ -8,7 +8,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BookFormComponent } from './book-form/book-form.component';
+import { BookFormComponent } from './shared/components/book-form/book-form.component';
 
 
 @NgModule({

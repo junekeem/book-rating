@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Book } from './book';
+import { Book } from '../models/book';
 
 import { BookRatingService } from './book-rating.service';
 

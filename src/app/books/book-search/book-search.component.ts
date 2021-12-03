@@ -1,8 +1,8 @@
-import { Book } from './../shared/book';
+import { Book } from '../shared/models/book';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter, Observable, switchMap } from 'rxjs';
-import { BookStoreService } from '../shared/book-store.service';
+import { BookStoreService } from '../shared/services/book-store.service';
 
 @Component({
   selector: 'br-book-search',

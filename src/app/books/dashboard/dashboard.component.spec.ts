@@ -1,6 +1,6 @@
 import { BookRatingService } from './../shared/book-rating.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Book } from '../shared/book';
+import { Book } from '../shared/models/book';
 
 import { DashboardComponent } from './dashboard.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
