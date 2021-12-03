@@ -1,4 +1,4 @@
-<p>Book Details</p>
+<h6>Book Details</h6>
 
 <!-- {{ book$| async | json }} -->
 
@@ -7,12 +7,14 @@
 <!-- <a [routerLink]="'/books'">Back to Dashboard</a> -->
 
 <ng-container *ngIf="book$| async as book">
-  <h1>{{book.title}}</h1>
+  <h2>{{book.title}}</h2>
   <p>{{book.description}}</p>
+  <button class="btn btn-info" [routerLink]="['/books', book.isbn, 'edit']">
+    Edit
+  </button>
 </ng-container>
 
 <hr>
 
 <a routerLink="/books">Back to Dashboard</a><br>
 <!-- <a routerLink="/books/9783864907791">Go to Angular-Book</a><br> -->
-

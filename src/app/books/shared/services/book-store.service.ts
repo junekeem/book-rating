@@ -25,6 +25,10 @@ export class BookStoreService {
     return this.http.post<Book>(this.apiUrl + '/books', book);
   }
 
+  update(isbn:string, book: Book): Observable<Book> {
+    return this.http.put<Book>(this.apiUrl + `/books/${isbn}`, book);
+  }
+
   search(term: string): Observable<Book[]> {
     return this.http.get<Book[]>(this.apiUrl + `/books/search/${term}`);
   }

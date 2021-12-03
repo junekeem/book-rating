@@ -1,3 +1,4 @@
+import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: ':isbn', // Better solution => path: 'details/:isbn';
     component: BookDetailsComponent,
+  },
+  {
+    path: ':isbn/edit',
+    component: BookEditComponent
   }
 ];
 

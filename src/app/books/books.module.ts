@@ -9,6 +9,7 @@ import { BookCreateComponent } from './book-create/book-create.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookFormComponent } from './shared/components/book-form/book-form.component';
+import { BookEditComponent } from './book-edit/book-edit.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BookFormComponent } from './shared/components/book-form/book-form.compo
     BookDetailsComponent,
     BookCreateComponent,
     BookSearchComponent,
-    BookFormComponent
+    BookFormComponent,
+    BookEditComponent
   ],
   imports: [
     CommonModule,
