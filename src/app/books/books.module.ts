@@ -10,6 +10,10 @@ import { BookSearchComponent } from './book-search/book-search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookFormComponent } from './shared/components/book-form/book-form.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromBook from './store/book.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './store/book.effects';
 
 
 @NgModule({
@@ -25,7 +29,9 @@ import { BookEditComponent } from './book-edit/book-edit.component';
   imports: [
     CommonModule,
     BooksRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
+    EffectsModule.forFeature([BookEffects])
   ],
   exports: [
     DashboardComponent
