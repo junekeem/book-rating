@@ -1,3 +1,4 @@
+import { selectLoading, selectBooks } from './../store/book.selectors';
 import { loadBooks } from './../store/book.actions';
 import { DialogService } from './../shared/services/dialog.service';
 import { BookStoreService } from './../shared/services/book-store.service';
@@ -15,6 +16,8 @@ export class DashboardComponent implements OnInit {
   // books?: Book[];
   // books : Book[] | undefined;
   books: Book[] = [];
+  loading$ = this.store.select(selectLoading);
+  books$ = this.store.select(selectBooks);
 
   // rs = new BookRatingService(); // Don't do this; Dependancy Injection, Inversion of Control(IoC)
 
@@ -26,6 +29,9 @@ export class DashboardComponent implements OnInit {
   ) {
     // this.getList();
     this.store.dispatch(loadBooks());
+    this.store.select(selectBooks).subscribe((books) => {
+      this.books = books;
+    });
   }
 
   ngOnInit(): void {

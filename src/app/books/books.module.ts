@@ -30,7 +30,7 @@ import { BookEffects } from './store/book.effects';
     CommonModule,
     BooksRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
+    StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.bookReducer),
     EffectsModule.forFeature([BookEffects])
   ],
   exports: [
