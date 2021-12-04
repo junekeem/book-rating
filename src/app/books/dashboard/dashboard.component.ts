@@ -1,8 +1,10 @@
+import { loadBooks } from './../store/book.actions';
 import { DialogService } from './../shared/services/dialog.service';
 import { BookStoreService } from './../shared/services/book-store.service';
 import { BookRatingService } from './../shared/services/book-rating.service';
 import { Book } from '../shared/models/book';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'br-dashboard',
@@ -19,9 +21,11 @@ export class DashboardComponent implements OnInit {
   constructor(
     private rs: BookRatingService, // by writing access modifier, no need to define property again (Day 1),
     private bookStoreService: BookStoreService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private store: Store
   ) {
-    this.getList();
+    // this.getList();
+    this.store.dispatch(loadBooks());
   }
 
   ngOnInit(): void {
