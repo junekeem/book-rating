@@ -1,5 +1,9 @@
 <h6>Book Edit</h6>
 
-<hr>
-
-<br-book-form [buttonText]="save"></br-book-form>
+<hr />
+<ng-container *ngIf="book$ | async as book">
+  <br-book-form
+  [book]="book"
+  [buttonText]="save"
+  (newBookForm)="updateBook($event)"></br-book-form>
+</ng-container>

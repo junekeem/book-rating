@@ -8,10 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./book-form.component.scss'],
 })
 export class BookFormComponent implements OnInit {
-
   @Output() newBookForm = new EventEmitter<FormGroup>();
 
-  @Input() buttonText= 'Button';
+  @Input() buttonText = 'Button';
+  @Input() book?: Book;
 
   bookForm!: FormGroup;
 
@@ -24,12 +24,14 @@ export class BookFormComponent implements OnInit {
       ]),
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
-      rating: new FormControl(1, [Validators.min(1), Validators.max(5)]),
+      rating: new FormControl(5, [Validators.min(1), Validators.max(5)]),
       price: new FormControl(0, [Validators.min(0), Validators.max(999)]),
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.book) this.setBookFormValue(this.book);
+  }
 
   isInvalid(controlName: string): boolean {
     const control = this.bookForm.get(controlName);
@@ -49,5 +51,15 @@ export class BookFormComponent implements OnInit {
       return;
     }
     this.newBookForm.emit(this.bookForm);
+  }
+
+  setBookFormValue(book: Book) {
+    this.bookForm.setValue({
+      isbn: book.isbn,
+      title: book.title,
+      description: book.description,
+      rating: book.rating,
+      price: book.price,
+    });
   }
 }

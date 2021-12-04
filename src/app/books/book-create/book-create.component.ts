@@ -12,7 +12,7 @@ import { Book } from '../shared/models/book';
 })
 export class BookCreateComponent implements OnInit {
 
-  edit: string = 'Edit';
+  create: string = 'Create';
 
   constructor(
     private bookStoreService: BookStoreService,
