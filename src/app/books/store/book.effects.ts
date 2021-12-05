@@ -5,6 +5,7 @@ import { Observable, EMPTY, of, tap } from 'rxjs';
 
 import * as BookActions from './book.actions';
 import { BookStoreService } from '../shared/services/book-store.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class BookEffects {
@@ -22,8 +23,23 @@ export class BookEffects {
     ); // The resulting Action will be dispatched automatically!
   });
 
+  createBook$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BookActions.createBook),
+      tap(e => console.log('Log', e)),
+      concatMap((action) =>
+        this.bookStoreService.create(action.data).pipe(
+          map((book) => BookActions.createBookSuccess({ data: book })),
+          tap((book)=>this.router.navigate(['/books', book.data.isbn])),
+          catchError((err) => of(BookActions.createBookFailure({ error: err })))
+        )
+      )
+    );
+  });
+
   constructor(
     private actions$: Actions,
-    private bookStoreService: BookStoreService
-  ) {}
+    private bookStoreService: BookStoreService,
+    private router: Router
+  ) { }
 }

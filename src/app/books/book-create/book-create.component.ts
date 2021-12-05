@@ -4,6 +4,9 @@ import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Book } from '../shared/models/book';
+import { Store } from '@ngrx/store';
+import { createBook } from '../store/book.actions';
+import { createSelectBook } from '../store/book.selectors';
 
 @Component({
   selector: 'br-book-create',
@@ -13,19 +16,25 @@ import { Book } from '../shared/models/book';
 export class BookCreateComponent implements OnInit {
 
   create: string = 'Create';
+  book!: Book;
 
   constructor(
     private bookStoreService: BookStoreService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private store: Store
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  getNewBookForm(bookForm: FormGroup){
-    this.createBook(bookForm);
+  getNewBookForm(bookForm: FormGroup) {
+    //    this.createBook(bookForm);
+    const book: Book = bookForm.value;
+    this.store.dispatch(createBook({data: book}));
   }
 
-  private createBook(bookForm: FormGroup) {
+
+
+  private createBook1(bookForm: FormGroup) {
 
     const book: Book = bookForm.value;
     this.bookStoreService.create(book).subscribe(book => {
