@@ -17,12 +17,12 @@ export const selectLoading = createSelector(
 
 export const createSelectBook = createSelector(
   createBookState,
-  (createState) => createState.book
+  (state) => state.book
 );
 
 export const createSelectLoading = createSelector(
   createBookState,
-  (createState) => createState.loading
+  (state) => state.loading
 );
 
 // export const getSelectedBook = createSelector(
